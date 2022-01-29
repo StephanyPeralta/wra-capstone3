@@ -1,13 +1,16 @@
 import React from 'react';
 
+import AuthProvider from '../../providers/Auth';
 import PreferencesProvider from '../../providers/Preferences';
 import Router from '../Router';
 
 function App() {
   return (
-    <PreferencesProvider>
-      <Router />
-    </PreferencesProvider>
+    <AuthProvider>
+      <PreferencesProvider>
+        <Router />
+      </PreferencesProvider>
+    </AuthProvider>
   );
 }
 
