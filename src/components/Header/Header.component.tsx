@@ -1,11 +1,14 @@
 import React from 'react';
 
+import { useAuth } from '../../providers/Auth';
 import Search from '../Search';
 import ThemeToggle from '../ThemeToggle';
 import ProfileButton from '../ProfileButton';
 import { HeaderWrapper, LogoTitle, HeaderSection } from './Header.styled';
 
 function Header() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <HeaderWrapper data-testid="header">
       <HeaderSection>
@@ -14,12 +17,12 @@ function Header() {
           <span className="brand-name-mobile">WK</span>
         </LogoTitle>
       </HeaderSection>
-      <Search />
+      {isAuthenticated && <Search />}
       <HeaderSection>
         <div className="hidden-tablet">
           <ThemeToggle />
         </div>
-        <ProfileButton />
+        {isAuthenticated && <ProfileButton />}
       </HeaderSection>
     </HeaderWrapper>
   );
