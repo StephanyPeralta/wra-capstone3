@@ -79,7 +79,7 @@ function Note({ id, title, description, bgColor }: NoteProps) {
           <h2 className="note-title">{title}</h2>
         ) : (
           <input
-            placeholder="Title"
+            placeholder="Edit title"
             type="text"
             onChange={(e) => setNoteTitle(e.target.value)}
             value={noteTitle}
@@ -92,7 +92,7 @@ function Note({ id, title, description, bgColor }: NoteProps) {
         ) : (
           <textarea
             rows={3}
-            placeholder="Type to add a note..."
+            placeholder="Edit content"
             onChange={(e) => setNoteDescription(e.target.value)}
             value={noteDescription}
           />

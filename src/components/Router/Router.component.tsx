@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Layout from '../Layout';
 import HomePage from '../../pages/Home';
@@ -9,21 +9,19 @@ import PrivateRoute from '../PrivateRoute';
 
 function Router() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Switch>
-          <PrivateRoute exact path="/archive">
-            <ArchivePage />
-          </PrivateRoute>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
-      </Layout>
-    </BrowserRouter>
+    <Layout>
+      <Switch>
+        <PrivateRoute exact path="/archive">
+          <ArchivePage />
+        </PrivateRoute>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
+    </Layout>
   );
 }
 
