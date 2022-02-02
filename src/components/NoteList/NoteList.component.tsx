@@ -1,19 +1,13 @@
 import React from 'react';
 
-import Note from '../Note';
 import { NoteListWrapper } from './NoteList.styled';
 
-function NoteList() {
-  return (
-    <NoteListWrapper>
-      <Note />
-      <Note />
-      <Note />
-      <Note />
-      <Note />
-      <Note />
-    </NoteListWrapper>
-  );
+type VideoListProps = {
+  children: React.ReactNode;
+};
+
+function NoteList({ children }: VideoListProps) {
+  return <NoteListWrapper>{children}</NoteListWrapper>;
 }
 
 export default NoteList;

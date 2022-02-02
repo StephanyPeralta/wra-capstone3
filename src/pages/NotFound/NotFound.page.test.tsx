@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import NotFound from './NotFound.page';
 
@@ -25,7 +26,7 @@ describe('NotFound page', () => {
     (useHistory as jest.Mock).mockReturnValue({ push: mockHistoryPush });
 
     const errorButton = screen.getByRole('button', { name: 'Go Back Home' });
-    fireEvent.click(errorButton);
+    userEvent.click(errorButton);
 
     expect(mockHistoryPush).toHaveBeenCalledWith('/');
   });

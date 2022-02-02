@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 import { ThemeProvider } from 'styled-components';
 import { Themes } from '../../utils/themes';
+import { useAuth } from '../../providers/Auth';
 import { usePreferences } from '../../providers/Preferences';
 import Header from '../Header';
 import SideMenu from '../SideMenu';
@@ -14,6 +15,7 @@ interface Props {
 }
 
 function Layout({ children }: Props) {
+  const { isAuthenticated } = useAuth();
   const { theme } = usePreferences();
 
   return (
@@ -22,7 +24,7 @@ function Layout({ children }: Props) {
         <ToastContainer />
         <Header />
         <SectionWrapper>
-          <SideMenu />
+          {isAuthenticated && <SideMenu />}
           <SectionContainer>{children}</SectionContainer>
         </SectionWrapper>
       </LayoutContainer>

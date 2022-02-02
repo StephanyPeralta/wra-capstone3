@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const HomeWrapper = styled.div`
+const ArchiveWrapper = styled.div`
   text-align: center;
   padding: 20px 60px 20px;
   h1 {
@@ -29,4 +29,4 @@ const InfoSearch = styled(InfoAlert)`
   background-color: #43a2ae;
 `;
 
-export { HomeWrapper, InfoAlert, InfoSearch };
+export { ArchiveWrapper, InfoAlert, InfoSearch };

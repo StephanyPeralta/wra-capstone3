@@ -1,15 +1,18 @@
 import React from 'react';
 
 import AuthProvider from '../../providers/Auth';
+import NotesProvider from '../../providers/Notes';
 import PreferencesProvider from '../../providers/Preferences';
 import Router from '../Router';
 
 function App() {
   return (
     <AuthProvider>
-      <PreferencesProvider>
-        <Router />
-      </PreferencesProvider>
+      <NotesProvider>
+        <PreferencesProvider>
+          <Router />
+        </PreferencesProvider>
+      </NotesProvider>
     </AuthProvider>
   );
 }

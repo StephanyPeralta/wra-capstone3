@@ -7,12 +7,19 @@ const SessionFormWrapper = styled.div`
   padding: 50px 100px;
   max-width: 650px;
   margin: 60px auto;
-  @media (min-width: 2018px) {
-    max-width: 1680px;
+  .link-form {
+    cursor: pointer;
+    text-decoration-line: underline;
+  }
+  @media (max-width: 576px) {
+    padding: 50px;
+  }
+  @media (max-width: 440px) {
+    padding: 40px 30px;
   }
 `;
 
-const AuthForm = styled.form`
+const AuthForm = styled.div`
   text-align: left;
   width: 100%;
   line-height: 155%;
@@ -55,4 +62,16 @@ const SessionButton = styled.button`
   }
 `;
 
-export { SessionFormWrapper, AuthForm, ButtonWrapper, SessionButton };
+const ErrorAlert = styled.div`
+  display: flex;
+  color: darkred;
+  align-items: center;
+  background-color: #ffebee;
+  border-radius: 5px;
+  margin: 0 auto 10px;
+  padding: 5px 8px;
+  width: 100%;
+  font-size: 16px;
+`;
+
+export { SessionFormWrapper, AuthForm, ButtonWrapper, SessionButton, ErrorAlert };
