@@ -91,7 +91,7 @@ const SaveButton = styled(NoteButton)`
 const ErrorAlert = styled.div`
   display: flex;
   align-items: center;
-  color: darkred;
+  color: #ce1313;
   font-size: 16px;
   margin: 0 auto 10px;
   padding: 5px 8px;

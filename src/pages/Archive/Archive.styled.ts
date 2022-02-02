@@ -25,4 +25,8 @@ const InfoAlert = styled.div`
   max-width: 630px;
 `;
 
-export { ArchiveWrapper, InfoAlert };
+const InfoSearch = styled(InfoAlert)`
+  background-color: #43a2ae;
+`;
+
+export { ArchiveWrapper, InfoAlert, InfoSearch };

@@ -10,8 +10,9 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 function ProfileButton() {
   const { logout } = useAuth();
-  const [openDropdown, setOpenDropdown] = useState(false);
   const { push } = useHistory();
+
+  const [openDropdown, setOpenDropdown] = useState(false);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
 

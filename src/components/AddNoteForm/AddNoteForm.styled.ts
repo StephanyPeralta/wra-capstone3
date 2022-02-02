@@ -28,7 +28,7 @@ const NoteForm = styled.form`
   .error-msg {
     display: flex;
     align-items: center;
-    color: darkred;
+    color: #ce1313;
     font-size: 16px;
     margin: 0 auto;
   }

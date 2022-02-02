@@ -35,16 +35,18 @@ function Note({ id, title, description, bgColor }: NoteProps) {
     const description = noteDescription;
     const bgColor = selectedColor;
 
-    if (title.trim().length > 0 && description.trim().length > 0) {
-      if (isArchived(selectedNote)) {
-        updateArchivedNote({ id, title, description, bgColor });
-      } else {
-        updateNote({ id, title, description, bgColor });
-      }
-      setEditMode(false);
-    } else {
+    if (title.trim().length === 0 || description.trim().length === 0) {
       setError('The note cannot be empty');
+      return;
     }
+
+    if (isArchived(selectedNote)) {
+      updateArchivedNote({ id, title, description, bgColor });
+    } else {
+      updateNote({ id, title, description, bgColor });
+    }
+
+    setEditMode(false);
   };
 
   function handleEditMode() {
@@ -64,8 +66,11 @@ function Note({ id, title, description, bgColor }: NoteProps) {
   }
 
   useOnClickOutside(noteRef, () => {
-    setEditMode(false);
-    setSelectedColor(bgColor);
+    if (!error) {
+      setEditMode(false);
+      setSelectedColor(bgColor);
+    }
+    return;
   });
 
   useEffect(() => {
@@ -76,26 +81,26 @@ function Note({ id, title, description, bgColor }: NoteProps) {
     <NoteWrapper ref={noteRef} style={{ backgroundColor: selectedColor }}>
       <div className="note-content">
         {!editMode ? (
-          <h2 className="note-title">{title}</h2>
+          <>
+            <h2 className="note-title">{title}</h2>
+            <p className="note-description">{description}</p>
+          </>
         ) : (
-          <input
-            placeholder="Edit title"
-            type="text"
-            onChange={(e) => setNoteTitle(e.target.value)}
-            value={noteTitle}
-            ref={titleRef}
-          />
-        )}
-
-        {!editMode ? (
-          <p className="note-description">{description}</p>
-        ) : (
-          <textarea
-            rows={3}
-            placeholder="Edit content"
-            onChange={(e) => setNoteDescription(e.target.value)}
-            value={noteDescription}
-          />
+          <>
+            <input
+              placeholder="Edit title"
+              type="text"
+              onChange={(e) => setNoteTitle(e.target.value)}
+              value={noteTitle}
+              ref={titleRef}
+            />
+            <textarea
+              rows={3}
+              placeholder="Edit content"
+              onChange={(e) => setNoteDescription(e.target.value)}
+              value={noteDescription}
+            />
+          </>
         )}
       </div>
       {error && <ErrorAlert>{error}</ErrorAlert>}

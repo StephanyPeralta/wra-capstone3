@@ -1,10 +1,11 @@
 import React from 'react';
 
-import AddNoteForm from '../../components/AddNoteForm';
-import NoteList from '../../components/NoteList';
-import SessionForm from '../../components/SessionForm';
 import { useAuth } from '../../providers/Auth';
 import { useNotesContext } from '../../providers/Notes';
+import AddNoteForm from '../../components/AddNoteForm';
+import NoteList from '../../components/NoteList';
+import Note from '../../components/Note';
+import SessionForm from '../../components/SessionForm';
 import { HomeWrapper, InfoAlert, InfoSearch } from './Home.styled';
 
 function HomePage() {
@@ -35,7 +36,17 @@ function HomePage() {
               There are no match results. Try another search.
             </InfoSearch>
           )}
-          <NoteList notes={filteredNotes} />
+          <NoteList>
+            {filteredNotes.map((note) => (
+              <Note
+                key={note.id}
+                id={note.id}
+                title={note.title}
+                description={note.description}
+                bgColor={note.bgColor}
+              />
+            ))}
+          </NoteList>
         </>
       )}
     </HomeWrapper>

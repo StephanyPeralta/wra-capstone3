@@ -1,36 +1,16 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
-import ArchivePage from './Archive.page';
 import { useAuth } from '../../providers/Auth';
-import { useNotesContext } from '../../providers/Notes';
+import NotesProvider from '../../providers/Notes';
+import ArchivePage from './Archive.page';
 
 jest.mock('../../providers/Auth', () => ({
   useAuth: jest.fn(),
 }));
-jest.mock('../../providers/Notes', () => ({
-  useNotesContext: jest.fn(),
-}));
-jest.mock('../../components/Note', () => () => <div>Note Mock</div>);
 
 const authMock = { isAuthenticated: true };
-
-const notesContextMock = {
-  archivedNotes: [
-    {
-      id: 'a12345',
-      title: 'Test Title',
-      description: 'Test Description',
-      bgColor: 'ffffff',
-    },
-    {
-      id: 'b12345',
-      title: 'Test Title',
-      description: 'Test Description',
-      bgColor: 'ffffff',
-    },
-  ],
-};
 
 describe('Archive page', () => {
   beforeEach(() => {
@@ -39,22 +19,30 @@ describe('Archive page', () => {
     (useAuth as jest.Mock).mockReturnValue(authMock);
   });
 
-  it('renders archivedNotes list if there are notes to show', () => {
-    (useNotesContext as jest.Mock).mockReturnValue(notesContextMock);
+  it('renders ArchivePage elements', () => {
+    render(
+      <NotesProvider>
+        <MemoryRouter>
+          <ArchivePage />
+        </MemoryRouter>
+      </NotesProvider>
+    );
 
-    render(<ArchivePage />);
+    const archiveTitle = screen.getByRole('heading', { name: 'Archived Notes' });
+    const notesMsg = screen.getByText("You don't have archived notes.");
 
-    const archivedNotesList = screen.getAllByText('Note Mock');
-
-    expect(archivedNotesList.length).toBe(2);
+    expect(archiveTitle).toBeInTheDocument();
+    expect(notesMsg).toBeInTheDocument();
   });
 
   it('renders info alert if the archivedNotes list is empty', () => {
-    (useNotesContext as jest.Mock).mockReturnValue({
-      archivedNotes: [],
-    });
-
-    render(<ArchivePage />);
+    render(
+      <NotesProvider>
+        <MemoryRouter>
+          <ArchivePage />
+        </MemoryRouter>
+      </NotesProvider>
+    );
 
     expect(screen.getByText("You don't have archived notes.")).toBeInTheDocument();
   });

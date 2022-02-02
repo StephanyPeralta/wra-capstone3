@@ -1,27 +1,13 @@
 import React from 'react';
 
-import Note from '../Note';
-import { NoteProps } from '../../utils/types';
 import { NoteListWrapper } from './NoteList.styled';
 
 type VideoListProps = {
-  notes: NoteProps[];
+  children: React.ReactNode;
 };
 
-function NoteList({ notes }: VideoListProps) {
-  return (
-    <NoteListWrapper>
-      {notes.map((note) => (
-        <Note
-          key={note.id}
-          id={note.id}
-          title={note.title}
-          description={note.description}
-          bgColor={note.bgColor}
-        />
-      ))}
-    </NoteListWrapper>
-  );
+function NoteList({ children }: VideoListProps) {
+  return <NoteListWrapper>{children}</NoteListWrapper>;
 }
 
 export default NoteList;
